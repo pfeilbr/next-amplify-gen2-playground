@@ -1,3 +1,13 @@
+# next-amplify-gen2-playgrouond
+
+demo via https://docs.amplify.aws/gen2/start/quickstart/
+
+## resources
+
+- https://docs.amplify.aws/gen2/start/quickstart/
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
