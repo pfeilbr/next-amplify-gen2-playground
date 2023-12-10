@@ -2,9 +2,22 @@
 import { useState, useEffect } from 'react';
 import { generateClient } from 'aws-amplify/data';
 import { Schema } from '@/amplify/data/resource';
+import { getCurrentUser } from 'aws-amplify/auth';
+import { get } from 'http';
 
 // generate your data client using the Schema from your backend
 const client = generateClient<Schema>();
+
+async function currentAuthenticatedUser() {
+  try {
+    const { username, userId, signInDetails } = await getCurrentUser();
+    console.log(`The username: ${username}`);
+    console.log(`The userId: ${userId}`);
+    console.log(`The signInDetails: ${signInDetails}`);
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 export default function HomePage() {
   const [todos, setTodos] = useState<Schema['Todo'][]>([]);
@@ -15,10 +28,18 @@ export default function HomePage() {
     setTodos(data);
   }
 
+  
   useEffect(() => {
+
+    const getCurrentAuthenticatedUser  = async () => {
+      await currentAuthenticatedUser();
+    }
+
+    getCurrentAuthenticatedUser().catch(console.error)
+
+    // fetch all todos
     const sub = client.models.Todo.observeQuery()
       .subscribe(({ items }) => setTodos([...items]))
-  
     return () => sub.unsubscribe()
   }, []);
 
