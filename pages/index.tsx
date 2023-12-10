@@ -13,7 +13,7 @@ async function currentAuthenticatedUser() {
     const { username, userId, signInDetails } = await getCurrentUser();
     console.log(`The username: ${username}`);
     console.log(`The userId: ${userId}`);
-    console.log(`The signInDetails: ${signInDetails}`);
+    console.log(`The signInDetails: ${JSON.stringify(signInDetails, null, 2)}`);
   } catch (err) {
     console.log(err);
   }
